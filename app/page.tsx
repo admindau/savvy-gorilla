@@ -42,14 +42,16 @@ export default function HomePage() {
           </div>
 
           {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
-          <div className="flex flex-col items-center gap-6 md:items-end">
-            {/* LOGO (FIXED — visible now) */}
+          <div className="flex flex-col items-center gap-6 md:items-end md:mt-4">
+            {/* LOGO IN GOLD RING */}
             <div className="flex w-full justify-center md:justify-end">
-              <img
-                src="/logos/savvy-gorilla-white.png"
-                alt="Savvy Gorilla Logo"
-                className="h-16 w-16 md:h-20 md:w-20"
-              />
+              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/70 bg-black/80">
+                <img
+                  src="/logos/savvy-gorilla-white.png"
+                  alt="Savvy Gorilla Logo"
+                  className="h-12 w-12"
+                />
+              </div>
             </div>
 
             {/* Portfolio Snapshot */}
