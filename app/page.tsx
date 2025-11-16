@@ -6,7 +6,7 @@ export default function HomePage() {
     <>
       {/* HERO SECTION */}
       <section className="border-b border-border bg-black">
-        <Container className="grid grid-cols-1 gap-10 py-16 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] md:items-center">
+        <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
           {/* LEFT SIDE – TEXT */}
           <div className="max-w-xl animate-fade-in">
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
@@ -41,9 +41,10 @@ export default function HomePage() {
             </div>
           </div>
 
-          {/* RIGHT SIDE – LOGO + PORTFOLIO SNAPSHOT */}
+          {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
           <div className="flex flex-col items-center gap-6 md:items-end">
-            <div className="flex justify-center md:justify-end w-full">
+            {/* Logo */}
+            <div className="flex w-full justify-center md:justify-end">
               <img
                 src="/logos/savvy-gorilla-white.png"
                 alt="Savvy Gorilla Logo"
@@ -51,6 +52,7 @@ export default function HomePage() {
               />
             </div>
 
+            {/* Portfolio Snapshot */}
             <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300 opacity-0 animate-fade-up">
               <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
                 Portfolio Snapshot
