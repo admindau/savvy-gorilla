@@ -67,7 +67,7 @@ export default function CompanyGrid() {
       {companies.map((company, index) => (
         <div
           key={company.name}
-          className="group flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 opacity-0 transition-transform duration-200 hover:-translate-y-1 hover:border-gray-300/60 hover:bg-muted/80 animate-fade-up"
+          className="group flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-gray-300/60 hover:bg-muted/80 animate-fade-up"
           style={{ animationDelay: `${index * 60}ms` }}
         >
           <div>
