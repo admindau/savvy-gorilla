@@ -2,8 +2,8 @@ import type { Config } from "tailwindcss";
 
 const config: Config = {
   content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx,js,jsx,mdx}",
+    "./components/**/*.{ts,tsx,js,jsx,mdx}",
     "./styles/**/*.{css}"
   ],
   theme: {
@@ -12,7 +12,6 @@ const config: Config = {
         sans: ["Inter", "system-ui", "sans-serif"]
       },
       colors: {
-        // Keep it simple: black / white / subtle greys
         background: "#000000",
         foreground: "#ffffff",
         muted: "#111111",
