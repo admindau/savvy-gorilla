@@ -11,7 +11,9 @@ const navItems = [
   { href: "/ecosystem", label: "Ecosystem" },
   { href: "/innovation", label: "Innovation" },
   { href: "/partnerships", label: "Partnerships" },
-  { href: "/contact", label: "Contact" }
+  { href: "/contact", label: "Contact" },
+  { href: "/leadership", label: "Leadership" },
+  { href: "/ceo-letter", label: "CEO Letter" }
 ];
 
 export default function SiteHeader() {
@@ -40,7 +42,7 @@ export default function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-xs md:flex">
+        <nav className="hidden items-center gap-5 text-xs md:flex">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"
@@ -57,7 +59,7 @@ export default function SiteHeader() {
               >
                 {item.label}
                 {isActive && (
-                  <span className="absolute -bottom-1 left-0 h-px w-full bg-white/70" />
+                  <span className="absolute -bottom-1 left-0 h-px w-full bg-accent" />
                 )}
               </Link>
             );

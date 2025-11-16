@@ -64,10 +64,11 @@ const companies: Company[] = [
 export default function CompanyGrid() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
-      {companies.map((company) => (
+      {companies.map((company, index) => (
         <div
           key={company.name}
-          className="group flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-gray-300/60 hover:bg-muted/80"
+          className="group flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 opacity-0 transition-transform duration-200 hover:-translate-y-1 hover:border-gray-300/60 hover:bg-muted/80 animate-fade-up"
+          style={{ animationDelay: `${index * 60}ms` }}
         >
           <div>
             <p className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-gray-500">

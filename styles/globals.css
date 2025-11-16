@@ -4,7 +4,9 @@
   color-scheme: dark;
 }
 
-/* Use normal CSS here – no @apply */
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   background-color: #000000;

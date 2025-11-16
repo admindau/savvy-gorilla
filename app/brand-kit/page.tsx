@@ -5,7 +5,7 @@ export default function BrandKitPage() {
   return (
     <section className="bg-black py-16">
       <Container className="space-y-10">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl animate-fade-in">
           <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
             Brand Kit
           </p>
@@ -14,8 +14,8 @@ export default function BrandKitPage() {
           </h1>
           <p className="mt-4 text-sm text-gray-300">
             This page provides core visual elements for Savvy Gorilla
-            Technologies™. For custom usage, co-branding, or campaign-specific
-            materials, please{" "}
+            Technologies™. For co-branding, custom layouts, or campaign assets,
+            please{" "}
             <Link href="/contact" className="underline underline-offset-4">
               contact the team
             </Link>
@@ -24,7 +24,7 @@ export default function BrandKitPage() {
         </div>
 
         <div className="grid gap-8 md:grid-cols-2">
-          <div className="rounded-2xl border border-border bg-muted/40 p-6">
+          <div className="rounded-2xl border border-border bg-muted/40 p-6 opacity-0 animate-fade-up">
             <h2 className="text-sm font-semibold text-white">Logos</h2>
             <p className="mt-2 text-xs text-gray-300">
               Primary mark in black-on-white and white-on-black. Use the white
@@ -46,13 +46,13 @@ export default function BrandKitPage() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-muted/40 p-6">
+          <div className="rounded-2xl border border-border bg-muted/40 p-6 opacity-0 animate-fade-up">
             <h2 className="text-sm font-semibold text-white">
               Colors & Typography
             </h2>
             <p className="mt-2 text-xs text-gray-300">
               The parent company identity is intentionally minimal and
-              monochrome.
+              monochrome, with a subtle gold accent for emphasis.
             </p>
             <ul className="mt-3 space-y-1 text-xs text-gray-300">
               <li>
@@ -64,16 +64,8 @@ export default function BrandKitPage() {
                 #FFFFFF
               </li>
               <li>
-                <span className="font-semibold text-white">
-                  Charcoal (optional):
-                </span>{" "}
-                #0D0D0D
-              </li>
-              <li>
-                <span className="font-semibold text-white">
-                  Light Grey (optional):
-                </span>{" "}
-                #F2F2F2
+                <span className="font-semibold text-white">Accent gold:</span>{" "}
+                #C6A667
               </li>
             </ul>
             <p className="mt-3 text-xs text-gray-300">
@@ -83,6 +75,29 @@ export default function BrandKitPage() {
               labels.
             </p>
           </div>
+        </div>
+
+        <div className="rounded-2xl border border-border bg-muted/40 p-6 text-xs text-gray-300 opacity-0 animate-fade-up">
+          <h2 className="text-sm font-semibold text-white">Press Kit</h2>
+          <p className="mt-2">
+            For journalists, event organisers, and partners, a basic press kit
+            typically includes:
+          </p>
+          <ul className="mt-3 space-y-1">
+            <li>• Short and long version of the Savvy Gorilla description</li>
+            <li>• Founder and co-founder bios</li>
+            <li>• Logo files (PNG/SVG) on light and dark backgrounds</li>
+            <li>• Selected photos or still frames from flagship projects</li>
+            <li>• Links to key products and podcasts</li>
+          </ul>
+          <p className="mt-3">
+            We can provide a tailored press kit on request. Share your context
+            and deadline via the{" "}
+            <Link href="/contact" className="underline underline-offset-4">
+              contact page
+            </Link>
+            .
+          </p>
         </div>
 
         <p className="max-w-3xl text-[0.7rem] text-gray-500">

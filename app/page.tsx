@@ -6,11 +6,12 @@ export default function HomePage() {
     <>
       <section className="border-b border-border bg-black">
         <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
-          <div className="max-w-xl">
+          <div className="max-w-xl animate-fade-in">
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
               Savvy Gorilla Technologies™
             </p>
-            <h1 className="mt-4 text-3xl font-semibold md:text-4xl">
+            <div className="mt-3 h-px w-16 bg-accent" />
+            <h1 className="mt-4 text-4xl font-semibold md:text-5xl">
               Where African innovation begins.
             </h1>
             <p className="mt-4 text-sm text-gray-300 md:text-base">
@@ -38,7 +39,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300">
+          <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300 opacity-0 animate-fade-up">
             <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
               Portfolio Snapshot
             </p>
@@ -56,7 +57,7 @@ export default function HomePage() {
       <section className="bg-black py-16">
         <Container>
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div>
+            <div className="animate-fade-in">
               <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
                 Our Companies
               </p>
@@ -64,7 +65,7 @@ export default function HomePage() {
                 An ecosystem of stories, products, and platforms.
               </h2>
             </div>
-            <p className="max-w-md text-xs text-gray-400">
+            <p className="max-w-md text-xs text-gray-400 animate-fade-in">
               Each subsidiary operates with its own identity and focus, while
               Savvy Gorilla provides the long-term strategy, technology
               standards, and brand stewardship.
