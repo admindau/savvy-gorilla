@@ -4,8 +4,11 @@ import CompanyGrid from "./components/company-grid";
 export default function HomePage() {
   return (
     <>
+      {/* HERO SECTION */}
       <section className="border-b border-border bg-black">
-        <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
+        <Container className="grid grid-cols-1 gap-10 py-16 md:grid-cols-2 md:items-center">
+          
+          {/* LEFT SIDE – TEXT */}
           <div className="max-w-xl animate-fade-in">
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
               Savvy Gorilla Technologies™
@@ -23,6 +26,7 @@ export default function HomePage() {
               From fintech platforms to storytelling studios, we are designing
               the next generation of African solutions.
             </p>
+
             <div className="mt-6 flex flex-wrap gap-3 text-xs">
               <a
                 href="/ecosystem"
@@ -39,21 +43,18 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300 opacity-0 animate-fade-up">
-            <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-              Portfolio Snapshot
-            </p>
-            <ul className="mt-3 space-y-2">
-              <li>• Gorilla Ledger™ — modern financial tracking app</li>
-              <li>• Our Matriline Podcast — girlhood to womanhood stories</li>
-              <li>• War Towards Purpose — legacy docu-series</li>
-              <li>• Savvy Rilla Studios — production and creative direction</li>
-              <li>• FX API & Roots Family Tree in active development</li>
-            </ul>
+          {/* RIGHT SIDE – LOGO */}
+          <div className="flex justify-center md:justify-end">
+            <img
+              src="/logos/savvy-gorilla-white.png"
+              alt="Savvy Gorilla Logo"
+              className="h-40 w-40 opacity-0 animate-fade-up"
+            />
           </div>
         </Container>
       </section>
 
+      {/* ECOSYSTEM SECTION */}
       <section className="bg-black py-16">
         <Container>
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
@@ -65,6 +66,7 @@ export default function HomePage() {
                 An ecosystem of stories, products, and platforms.
               </h2>
             </div>
+
             <p className="max-w-md text-xs text-gray-400 animate-fade-in">
               Each subsidiary operates with its own identity and focus, while
               Savvy Gorilla provides the long-term strategy, technology
