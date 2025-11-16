@@ -67,10 +67,10 @@ export default function CompanyGrid() {
       {companies.map((company) => (
         <div
           key={company.name}
-          className="flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 transition hover:bg-muted/80"
+          className="group flex flex-col justify-between rounded-2xl border border-border bg-muted/40 p-6 transition-transform duration-200 hover:-translate-y-1 hover:border-gray-300/60 hover:bg-muted/80"
         >
           <div>
-            <p className="text-xs font-semibold tracking-[0.2em] uppercase text-gray-400">
+            <p className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-gray-500">
               {company.tag}
             </p>
             <h3 className="mt-2 text-lg font-semibold text-white">
@@ -84,9 +84,10 @@ export default function CompanyGrid() {
                 href={company.href}
                 target="_blank"
                 rel="noreferrer"
-                className="text-xs font-medium text-gray-200 underline underline-offset-4 hover:text-white"
+                className="inline-flex items-center text-[0.7rem] font-medium text-gray-200 underline underline-offset-4 group-hover:text-white"
               >
                 Visit {company.name}
+                <span className="ml-1 text-[0.6rem]">↗</span>
               </a>
             </div>
           )}
