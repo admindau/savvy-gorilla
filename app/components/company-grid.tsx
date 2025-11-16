@@ -27,7 +27,7 @@ const companies: Company[] = [
     tag: "Fintech",
     description:
       "Modern financial tracking for individuals and small teams across Africa.",
-    href: "https://gorillaledger.savvyrilla.tech"
+    href: "https://gl.savvyrilla.tech"
   },
   {
     name: "Roots Family Tree",
