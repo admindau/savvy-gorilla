@@ -43,17 +43,17 @@ export default function HomePage() {
 
           {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
           <div className="flex flex-col items-center gap-6 md:items-end">
-            {/* Logo */}
+            {/* LOGO (FIXED — visible now) */}
             <div className="flex w-full justify-center md:justify-end">
               <img
                 src="/logos/savvy-gorilla-white.png"
                 alt="Savvy Gorilla Logo"
-                className="h-16 w-16 md:h-20 md:w-20 opacity-0 animate-fade-up"
+                className="h-16 w-16 md:h-20 md:w-20"
               />
             </div>
 
             {/* Portfolio Snapshot */}
-            <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300 opacity-0 animate-fade-up">
+            <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300">
               <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
                 Portfolio Snapshot
               </p>
