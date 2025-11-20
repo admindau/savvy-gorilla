@@ -19,6 +19,18 @@ export default function EcosystemPage() {
             ecosystem led by a shared strategy and a commitment to African
             innovation.
           </p>
+          <p className="mt-4 text-xs text-gray-400">
+            You can now access our live FX and financial data platform here:{" "}
+            <a
+              href="https://fx.savvyrilla.tech"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline underline-offset-2 hover:text-white"
+            >
+              Savvy Rilla FX API ↗
+            </a>
+            .
+          </p>
         </div>
 
         <CompanyGrid />

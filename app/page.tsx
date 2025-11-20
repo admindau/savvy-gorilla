@@ -38,6 +38,14 @@ export default function HomePage() {
               >
                 Partnership Opportunities
               </a>
+              <a
+                href="https://fx.savvyrilla.tech"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-full border border-border px-4 py-2 text-gray-300 transition hover:border-white hover:text-white"
+              >
+                Visit Savvy Rilla FX API ↗
+              </a>
             </div>
           </div>
 
@@ -64,7 +72,18 @@ export default function HomePage() {
                 <li>• Our Matriline Podcast — girlhood to womanhood stories</li>
                 <li>• War Towards Purpose — legacy docu-series</li>
                 <li>• Savvy Rilla Studios — production and creative direction</li>
-                <li>• FX API & Roots Family Tree in active development</li>
+                <li>
+                  •{" "}
+                  <a
+                    href="https://fx.savvyrilla.tech"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline underline-offset-2 hover:text-white"
+                  >
+                    Savvy Rilla FX API
+                  </a>{" "}
+                  — live FX & financial data service
+                </li>
               </ul>
             </div>
           </div>
