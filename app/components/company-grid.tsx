@@ -39,7 +39,8 @@ const companies: Company[] = [
     name: "Savvy Rilla FX API",
     tag: "APIs & Data",
     description:
-      "Developer-first FX and financial data services built for African markets."
+      "Developer-first FX and financial data services built for African markets.",
+    href: "https://fx.savvyrilla.tech"   // ⭐️ Added link here
   },
   {
     name: "Our Matriline Podcast",
@@ -79,6 +80,7 @@ export default function CompanyGrid() {
             </h3>
             <p className="mt-2 text-sm text-gray-300">{company.description}</p>
           </div>
+
           {company.href && (
             <div className="mt-4">
               <a
