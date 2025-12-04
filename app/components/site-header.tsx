@@ -64,6 +64,16 @@ export default function SiteHeader() {
               </Link>
             );
           })}
+
+          {/* External link to Savvy GoRilla Foundation */}
+          <a
+            href="https://foundation.savvygorilla.tech"
+            target="_blank"
+            rel="noreferrer"
+            className="transition text-gray-400 hover:text-gray-100"
+          >
+            Foundation
+          </a>
         </nav>
       </Container>
     </header>

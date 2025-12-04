@@ -61,6 +61,16 @@ export default function SiteFooter() {
                   Gorilla Ledger™ (Fintech)
                 </a>
               </li>
+              <li>
+                <a
+                  href="https://foundation.savvygorilla.tech"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-gray-200"
+                >
+                  Savvy GoRilla Foundation (Impact)
+                </a>
+              </li>
             </ul>
           </div>
 
