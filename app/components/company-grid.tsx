@@ -40,7 +40,7 @@ const companies: Company[] = [
     tag: "APIs & Data",
     description:
       "Developer-first FX and financial data services built for African markets.",
-    href: "https://fx.savvyrilla.tech"   // ⭐️ Added link here
+    href: "https://fx.savvyrilla.tech"
   },
   {
     name: "Our Matriline Podcast",
@@ -55,10 +55,11 @@ const companies: Company[] = [
       "Documenting the lives of freedom fighters, families, and leaders before history forgets them."
   },
   {
-    name: "Savvy Rilla Foundation",
+    name: "Savvy GoRilla Foundation",
     tag: "Impact",
     description:
-      "Emerging initiatives in gender equality, health awareness, youth empowerment, and digital literacy."
+      "Emerging initiatives in gender equality, health awareness, youth empowerment, and digital literacy.",
+    href: "https://foundation.savvygorilla.tech"
   }
 ];
 
