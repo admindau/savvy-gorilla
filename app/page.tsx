@@ -1,8 +1,13 @@
 import Container from "./components/container";
 import CompanyGrid from "./components/company-grid";
 import Reveal from "./components/reveal";
+import NowBuilding from "./components/now-building";
+import AtAGlance from "./components/at-a-glance";
+import { ECOSYSTEM } from "./content/ecosystem";
 
 export default function HomePage() {
+  const coreProducts = ECOSYSTEM.filter((c) => c.priority === "core");
+
   return (
     <>
       {/* HERO SECTION */}
@@ -10,11 +15,7 @@ export default function HomePage() {
         <Container className="relative flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
           {/* Watermark logo */}
           <div className="pointer-events-none absolute right-0 top-8 hidden w-[520px] opacity-[0.08] md:block">
-            <img
-              src="/logos/savvy-gorilla-white.png"
-              alt=""
-              className="h-auto w-full"
-            />
+            <img src="/logos/savvy-gorilla-white.png" alt="" className="h-auto w-full" />
           </div>
 
           {/* LEFT SIDE – TEXT */}
@@ -37,50 +38,15 @@ export default function HomePage() {
 
             <Reveal delayMs={190}>
               <p className="mt-4 text-sm text-gray-300 md:text-base">
-                Savvy Gorilla is a modern African holding company building and
-                backing products at the intersection of{" "}
-                <span className="font-medium text-white">
-                  creativity, culture, and technology.
-                </span>{" "}
-                From fintech platforms to storytelling studios, we are designing
-                the next generation of African solutions.
+                Savvy Gorilla is a modern African holding company building and backing products at the intersection of{" "}
+                <span className="font-medium text-white">creativity, culture, and technology.</span>{" "}
+                From fintech platforms to storytelling studios, we are designing the next generation of African solutions.
               </p>
             </Reveal>
 
-            {/* Now Building (Phase 1.2 stub – we’ll make it data-driven next) */}
+            {/* Now Building (data-driven) */}
             <Reveal delayMs={240}>
-              <div className="mt-6 rounded-3xl border border-border bg-muted/30 p-5">
-                <div className="flex items-center justify-between gap-4">
-                  <div className="flex items-center gap-2">
-                    <span className="relative inline-flex h-2 w-2">
-                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
-                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
-                    </span>
-                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-400">
-                      Now building
-                    </p>
-                  </div>
-                  <span className="rounded-full border border-accent/40 bg-muted/60 px-3 py-1 text-[0.7rem] text-gray-100">
-                    In Progress
-                  </span>
-                </div>
-
-                <p className="mt-3 text-sm font-semibold text-white">
-                  Gorilla Ledger™
-                </p>
-                <p className="mt-1 text-xs text-gray-300">
-                  Fintech tracking app shipping iteratively.
-                </p>
-
-                <a
-                  href="https://gorillaledger.savvyrilla.tech"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="mt-3 inline-flex w-fit text-[0.75rem] font-medium text-gray-200 underline underline-offset-4 hover:text-white"
-                >
-                  View ↗
-                </a>
-              </div>
+              <NowBuilding autoRotate />
             </Reveal>
 
             <Reveal delayMs={290}>
@@ -109,7 +75,7 @@ export default function HomePage() {
             </Reveal>
           </div>
 
-          {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
+          {/* RIGHT SIDE – LOGO + AT-A-GLANCE */}
           <div className="relative z-10 flex flex-col items-center gap-6 md:items-end md:mt-4">
             <Reveal>
               <div className="flex w-full justify-center md:justify-end">
@@ -124,31 +90,46 @@ export default function HomePage() {
             </Reveal>
 
             <Reveal delayMs={120}>
-              <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300">
-                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-                  Portfolio Snapshot
-                </p>
-                <ul className="mt-3 space-y-2">
-                  <li>• Gorilla Ledger™ — modern financial tracking app</li>
-                  <li>• Our Matriline Podcast — girlhood to womanhood stories</li>
-                  <li>• War Towards Purpose — legacy docu-series</li>
-                  <li>• Savvy Rilla Studios — production and creative direction</li>
-                  <li>
-                    •{" "}
-                    <a
-                      href="https://fx.savvyrilla.tech"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="underline underline-offset-2 hover:text-white"
-                    >
-                      Savvy Rilla FX API
-                    </a>{" "}
-                    — live FX & financial data service
-                  </li>
-                </ul>
-              </div>
+              <AtAGlance />
             </Reveal>
           </div>
+        </Container>
+      </section>
+
+      {/* CORE PRODUCTS STRIP (product-first clarity) */}
+      <section className="bg-black py-10">
+        <Container>
+          <Reveal>
+            <div className="rounded-3xl border border-border bg-muted/25 p-6 md:p-8">
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                Core products
+              </p>
+
+              <div className="mt-4 grid gap-4 md:grid-cols-2">
+                {coreProducts.slice(0, 2).map((p) => (
+                  <div key={p.id} className="rounded-2xl border border-accent/25 bg-black/25 p-5">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-sm font-semibold text-white">{p.name}</p>
+                      <span className="rounded-full border border-accent/35 bg-muted/50 px-3 py-1 text-[0.7rem] text-gray-100">
+                        {p.status}
+                      </span>
+                    </div>
+                    <p className="mt-2 text-xs text-gray-300">{p.description}</p>
+                    {p.href && (
+                      <a
+                        href={p.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="mt-3 inline-flex w-fit text-[0.75rem] font-medium text-gray-200 underline underline-offset-4 hover:text-white"
+                      >
+                        View ↗
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -189,9 +170,8 @@ export default function HomePage() {
 
             <Reveal delayMs={120}>
               <p className="max-w-md text-xs text-gray-400">
-                Each subsidiary operates with its own identity and focus, while
-                Savvy Gorilla provides the long-term strategy, technology
-                standards, and brand stewardship.
+                Each subsidiary operates with its own identity and focus, while Savvy Gorilla provides the long-term
+                strategy, technology standards, and brand stewardship.
               </p>
             </Reveal>
           </div>
