@@ -1,113 +1,75 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { ECOSYSTEM, ECOSYSTEM_FILTERS, type Company, type EcosystemFilterKey } from "../content/ecosystem";
 
-type CompanyCategory = "Media" | "Production" | "Fintech" | "Heritage" | "Data" | "Podcast" | "Docu-series" | "Impact";
-
-type Company = {
-  name: string;
-  description: string;
-  tag: CompanyCategory;
-  href?: string;
-  status?: "Live" | "In Progress" | "Concept";
-  missionLine?: string;
-};
-
-const companies: Company[] = [
-  {
-    name: "Savvy Rilla",
-    tag: "Media",
-    description: "Storytelling, podcasts, and cultural projects that amplify African voices.",
-    href: "https://savvyrilla.tech",
-    status: "Live",
-    missionLine: "Culture-forward media that moves narratives."
-  },
-  {
-    name: "Savvy Rilla Studios",
-    tag: "Production",
-    description: "Cinematic production for podcasts, documentaries, and branded content.",
-    href: "https://studios.savvygorilla.tech",
-    status: "In Progress",
-    missionLine: "A studio pipeline built for consistency and quality."
-  },
-  {
-    name: "Gorilla Ledger™",
-    tag: "Fintech",
-    description: "Modern financial tracking for individuals and small teams across Africa.",
-    href: "https://gorillaledger.savvyrilla.tech",
-    status: "In Progress",
-    missionLine: "A financial system you can actually live with."
-  },
-  {
-    name: "Roots Family Tree",
-    tag: "Heritage",
-    description: "A digital home for family lineage, memory, and intergenerational storytelling.",
-    status: "Concept",
-    missionLine: "Preserve lineage, memory, and identity—properly."
-  },
-  {
-    name: "Savvy Rilla FX API",
-    tag: "Data",
-    description: "Developer-first FX and financial data services built for African markets.",
-    href: "https://fx.savvyrilla.tech",
-    status: "Live",
-    missionLine: "Reliable data, clean endpoints, real utility."
-  },
-  {
-    name: "Our Matriline Podcast",
-    tag: "Podcast",
-    description: "Girlhood, womanhood, and the journey in between—through African matrilineal stories.",
-    status: "Live",
-    missionLine: "Stories that feel like home and grow like truth."
-  },
-  {
-    name: "War Towards Purpose",
-    tag: "Docu-series",
-    description: "Documenting the lives of freedom fighters, families, and leaders before history forgets them.",
-    status: "In Progress",
-    missionLine: "Archive legacy with dignity and narrative craft."
-  },
-  {
-    name: "Savvy GoRilla Foundation",
-    tag: "Impact",
-    description: "Emerging initiatives in gender equality, health awareness, youth empowerment, and digital literacy.",
-    href: "https://foundation.savvygorilla.tech",
-    status: "In Progress",
-    missionLine: "Impact programs anchored in systems, not slogans."
-  }
-];
-
-const FILTERS: Array<{ key: "All" | CompanyCategory; label: string }> = [
-  { key: "All", label: "All" },
-  { key: "Fintech", label: "Products" },
-  { key: "Data", label: "Data" },
-  { key: "Media", label: "Media" },
-  { key: "Podcast", label: "Podcasts" },
-  { key: "Impact", label: "Impact" },
-  { key: "Heritage", label: "Heritage" }
-];
-
-function statusBadge(status?: Company["status"]) {
-  if (!status) return "border border-border bg-black/20 text-gray-300";
+function statusBadgeClass(status: Company["status"]) {
   if (status === "Live") return "border border-border bg-muted/60 text-gray-100";
   if (status === "In Progress") return "border border-accent/40 bg-muted/60 text-gray-100";
   return "border border-border bg-black/20 text-gray-300";
 }
 
+function priorityCardClass(priority: Company["priority"]) {
+  // Product-first emphasis: core products get a subtle “signature” lift.
+  if (priority === "core") {
+    return "border-accent/30 bg-muted/55 hover:border-accent/45";
+  }
+  if (priority === "studio") {
+    return "border-border bg-muted/40 hover:border-gray-300/50";
+  }
+  return "border-border bg-black/25 hover:border-gray-300/40";
+}
+
+function priorityLabel(priority: Company["priority"]) {
+  if (priority === "core") return "Core";
+  if (priority === "studio") return "Studio";
+  return "Pillar";
+}
+
+function filterCompanies(filter: EcosystemFilterKey, items: Company[]) {
+  const cfg = ECOSYSTEM_FILTERS.find((f) => f.key === filter);
+  if (!cfg || filter === "All") return items;
+  const tags = cfg.tags ?? [];
+  return items.filter((c) => tags.includes(c.tag));
+}
+
+function sortProductFirst(items: Company[]) {
+  const rank = (c: Company) => {
+    // core products on top; then studios; then pillars
+    if (c.priority === "core") return 0;
+    if (c.priority === "studio") return 1;
+    return 2;
+  };
+
+  return [...items].sort((a, b) => {
+    const ra = rank(a);
+    const rb = rank(b);
+    if (ra !== rb) return ra - rb;
+
+    // secondary sort: Live first, then In Progress, then Concept
+    const statusRank = (s: Company["status"]) => (s === "Live" ? 0 : s === "In Progress" ? 1 : 2);
+    const sa = statusRank(a.status);
+    const sb = statusRank(b.status);
+    if (sa !== sb) return sa - sb;
+
+    return a.name.localeCompare(b.name);
+  });
+}
+
 export default function CompanyGrid() {
-  const [filter, setFilter] = useState<(typeof FILTERS)[number]["key"]>("All");
+  const [filter, setFilter] = useState<EcosystemFilterKey>("All");
   const [open, setOpen] = useState<string | null>(null);
 
-  const filtered = useMemo(() => {
-    if (filter === "All") return companies;
-    return companies.filter((c) => c.tag === filter);
+  const visible = useMemo(() => {
+    const filtered = filterCompanies(filter, ECOSYSTEM);
+    return sortProductFirst(filtered);
   }, [filter]);
 
   return (
     <div className="space-y-6">
       {/* Filters */}
       <div className="flex flex-wrap gap-2">
-        {FILTERS.map((f) => (
+        {ECOSYSTEM_FILTERS.map((f) => (
           <button
             key={f.key}
             type="button"
@@ -129,34 +91,42 @@ export default function CompanyGrid() {
 
       {/* Grid */}
       <div className="grid gap-6 md:grid-cols-2">
-        {filtered.map((company, index) => {
-          const isOpen = open === company.name;
+        {visible.map((company, index) => {
+          const isOpen = open === company.id;
 
           return (
             <div
-              key={company.name}
-              className="group rounded-2xl border border-border bg-muted/40 p-6 transition duration-200 hover:-translate-y-1 hover:border-gray-300/50 hover:bg-muted/70 animate-fade-up"
-              style={{ animationDelay: `${index * 50}ms` }}
+              key={company.id}
+              className={`group rounded-2xl border p-6 transition duration-200 hover:-translate-y-1 hover:bg-muted/70 animate-fade-up ${priorityCardClass(
+                company.priority
+              )}`}
+              style={{ animationDelay: `${index * 45}ms` }}
             >
               <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-gray-500">
-                    {company.tag}
-                  </p>
-                  <h3 className="mt-2 text-lg font-semibold text-white">{company.name}</h3>
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-gray-500">
+                      {company.tag}
+                    </p>
+                    <span className="rounded-full border border-border bg-black/20 px-2 py-[2px] text-[0.65rem] text-gray-300">
+                      {priorityLabel(company.priority)}
+                    </span>
+                  </div>
+
+                  <h3 className="mt-2 truncate text-lg font-semibold text-white">{company.name}</h3>
                   <p className="mt-2 text-sm text-gray-300">{company.description}</p>
                 </div>
 
-                <div className={`shrink-0 rounded-full px-3 py-1 text-[0.7rem] ${statusBadge(company.status)}`}>
-                  {company.status ?? "Concept"}
+                <div className={`shrink-0 rounded-full px-3 py-1 text-[0.7rem] ${statusBadgeClass(company.status)}`}>
+                  {company.status}
                 </div>
               </div>
 
-              {/* Expand */}
+              {/* Actions */}
               <div className="mt-4 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
-                  onClick={() => setOpen(isOpen ? null : company.name)}
+                  onClick={() => setOpen(isOpen ? null : company.id)}
                   className="rounded-full border border-border px-4 py-2 text-[0.75rem] font-medium text-gray-200 transition hover:border-gray-300/60 hover:text-white"
                   aria-expanded={isOpen}
                 >
@@ -175,20 +145,37 @@ export default function CompanyGrid() {
                 )}
               </div>
 
+              {/* Details */}
               {isOpen && (
                 <div className="mt-4 rounded-2xl border border-border/80 bg-black/30 p-4">
                   <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
                     Why it exists
                   </p>
+
                   <p className="mt-2 text-sm text-gray-200">
                     {company.missionLine ?? "Built to strengthen the Savvy Gorilla ecosystem through focus and craft."}
                   </p>
 
-                  <div className="mt-3 text-xs text-gray-400">
-                    <span className="text-gray-300">Status:</span>{" "}
-                    {company.status ?? "Concept"} •{" "}
-                    <span className="text-gray-300">Focus:</span> {company.tag}
+                  <div className="mt-4 grid gap-2 text-xs text-gray-400 sm:grid-cols-3">
+                    <div>
+                      <span className="text-gray-300">Status:</span> {company.status}
+                    </div>
+                    <div>
+                      <span className="text-gray-300">Updated:</span> {company.lastUpdated ?? "—"}
+                    </div>
+                    <div>
+                      <span className="text-gray-300">Focus:</span> {company.tag}
+                    </div>
                   </div>
+
+                  {company.stageNote && (
+                    <div className="mt-3 rounded-2xl border border-border bg-black/25 p-3">
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                        Momentum
+                      </p>
+                      <p className="mt-2 text-sm text-gray-200">{company.stageNote}</p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
