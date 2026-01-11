@@ -1,95 +1,153 @@
 import Container from "./components/container";
 import CompanyGrid from "./components/company-grid";
-import NowBuilding from "./components/now-building";
+import Reveal from "./components/reveal";
 
 export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
-      <section className="border-b border-border bg-black">
-        <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-start md:justify-between">
+      <section className="border-b border-border bg-black bg-radial">
+        <Container className="relative flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
+          {/* Watermark logo */}
+          <div className="pointer-events-none absolute right-0 top-8 hidden w-[520px] opacity-[0.08] md:block">
+            <img
+              src="/logos/savvy-gorilla-white.png"
+              alt=""
+              className="h-auto w-full"
+            />
+          </div>
+
           {/* LEFT SIDE – TEXT */}
-          <div className="max-w-xl animate-fade-in">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-              Savvy Gorilla Technologies™
-            </p>
+          <div className="max-w-xl">
+            <Reveal>
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                Savvy Gorilla Technologies™
+              </p>
+            </Reveal>
 
-            <div className="mt-3 h-px w-16 bg-accent" />
+            <Reveal delayMs={90}>
+              <div className="mt-3 h-px w-16 bg-accent" />
+            </Reveal>
 
-            <h1 className="mt-4 text-4xl font-semibold md:text-5xl">
-              Where African innovation begins.
-            </h1>
+            <Reveal delayMs={140}>
+              <h1 className="mt-4 text-4xl font-semibold md:text-5xl">
+                Where African innovation begins.
+              </h1>
+            </Reveal>
 
-            <p className="mt-4 text-sm text-gray-300 md:text-base">
-              Savvy Gorilla is a modern African holding company building and backing
-              products at the intersection of{" "}
-              <span className="font-medium text-white">creativity, culture, and technology.</span>{" "}
-              From fintech platforms to storytelling studios, we are designing the next generation of African solutions.
-            </p>
+            <Reveal delayMs={190}>
+              <p className="mt-4 text-sm text-gray-300 md:text-base">
+                Savvy Gorilla is a modern African holding company building and
+                backing products at the intersection of{" "}
+                <span className="font-medium text-white">
+                  creativity, culture, and technology.
+                </span>{" "}
+                From fintech platforms to storytelling studios, we are designing
+                the next generation of African solutions.
+              </p>
+            </Reveal>
 
-            <NowBuilding />
+            {/* Now Building (Phase 1.2 stub – we’ll make it data-driven next) */}
+            <Reveal delayMs={240}>
+              <div className="mt-6 rounded-3xl border border-border bg-muted/30 p-5">
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex items-center gap-2">
+                    <span className="relative inline-flex h-2 w-2">
+                      <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent/60" />
+                      <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+                    </span>
+                    <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-400">
+                      Now building
+                    </p>
+                  </div>
+                  <span className="rounded-full border border-accent/40 bg-muted/60 px-3 py-1 text-[0.7rem] text-gray-100">
+                    In Progress
+                  </span>
+                </div>
 
-            <div className="mt-6 flex flex-wrap gap-3 text-xs">
-              <a
-                href="/ecosystem"
-                className="rounded-full border border-white px-4 py-2 font-medium tracking-wide transition hover:bg-white hover:text-black"
-              >
-                Explore Our Ecosystem
-              </a>
-              <a
-                href="/partnerships"
-                className="rounded-full border border-border px-4 py-2 text-gray-300 transition hover:border-white hover:text-white"
-              >
-                Partnership Opportunities
-              </a>
-              <a
-                href="https://fx.savvyrilla.tech"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-full border border-border px-4 py-2 text-gray-300 transition hover:border-white hover:text-white"
-              >
-                Visit Savvy Rilla FX API ↗
-              </a>
-            </div>
+                <p className="mt-3 text-sm font-semibold text-white">
+                  Gorilla Ledger™
+                </p>
+                <p className="mt-1 text-xs text-gray-300">
+                  Fintech tracking app shipping iteratively.
+                </p>
+
+                <a
+                  href="https://gorillaledger.savvyrilla.tech"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-flex w-fit text-[0.75rem] font-medium text-gray-200 underline underline-offset-4 hover:text-white"
+                >
+                  View ↗
+                </a>
+              </div>
+            </Reveal>
+
+            <Reveal delayMs={290}>
+              <div className="mt-6 flex flex-wrap gap-3 text-xs">
+                <a
+                  href="/ecosystem"
+                  className="rounded-full border border-white px-4 py-2 font-medium tracking-wide transition hover:bg-white hover:text-black"
+                >
+                  Explore Our Ecosystem
+                </a>
+                <a
+                  href="/partnerships"
+                  className="rounded-full border border-border px-4 py-2 text-gray-300 transition hover:border-white hover:text-white"
+                >
+                  Partnership Opportunities
+                </a>
+                <a
+                  href="https://fx.savvyrilla.tech"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-full border border-border px-4 py-2 text-gray-300 transition hover:border-white hover:text-white"
+                >
+                  Visit Savvy Rilla FX API ↗
+                </a>
+              </div>
+            </Reveal>
           </div>
 
           {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
-          <div className="flex flex-col items-center gap-6 md:items-end md:mt-1">
-            {/* LOGO IN ACCENT RING */}
-            <div className="flex w-full justify-center md:justify-end">
-              <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/70 bg-black/80">
-                <img
-                  src="/logos/savvy-gorilla-white.png"
-                  alt="Savvy Gorilla Logo"
-                  className="h-12 w-12"
-                />
+          <div className="relative z-10 flex flex-col items-center gap-6 md:items-end md:mt-4">
+            <Reveal>
+              <div className="flex w-full justify-center md:justify-end">
+                <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/70 bg-black/80">
+                  <img
+                    src="/logos/savvy-gorilla-white.png"
+                    alt="Savvy Gorilla Logo"
+                    className="h-12 w-12"
+                  />
+                </div>
               </div>
-            </div>
+            </Reveal>
 
-            {/* Portfolio Snapshot */}
-            <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300">
-              <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-                Portfolio Snapshot
-              </p>
-              <ul className="mt-3 space-y-2">
-                <li>• Gorilla Ledger™ — modern financial tracking app</li>
-                <li>• Our Matriline Podcast — girlhood to womanhood stories</li>
-                <li>• War Towards Purpose — legacy docu-series</li>
-                <li>• Savvy Rilla Studios — production and creative direction</li>
-                <li>
-                  •{" "}
-                  <a
-                    href="https://fx.savvyrilla.tech"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline underline-offset-2 hover:text-white"
-                  >
-                    Savvy Rilla FX API
-                  </a>{" "}
-                  — live FX & financial data service
-                </li>
-              </ul>
-            </div>
+            <Reveal delayMs={120}>
+              <div className="max-w-md rounded-3xl border border-border bg-muted/40 p-6 text-xs text-gray-300">
+                <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                  Portfolio Snapshot
+                </p>
+                <ul className="mt-3 space-y-2">
+                  <li>• Gorilla Ledger™ — modern financial tracking app</li>
+                  <li>• Our Matriline Podcast — girlhood to womanhood stories</li>
+                  <li>• War Towards Purpose — legacy docu-series</li>
+                  <li>• Savvy Rilla Studios — production and creative direction</li>
+                  <li>
+                    •{" "}
+                    <a
+                      href="https://fx.savvyrilla.tech"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline underline-offset-2 hover:text-white"
+                    >
+                      Savvy Rilla FX API
+                    </a>{" "}
+                    — live FX & financial data service
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
           </div>
         </Container>
       </section>
@@ -97,18 +155,20 @@ export default function HomePage() {
       {/* MANIFESTO */}
       <section className="bg-black py-14">
         <Container>
-          <div className="rounded-3xl border border-border bg-muted/25 p-8 md:p-10 animate-fade-in">
-            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-              Our stance
-            </p>
-            <div className="mt-3 grid gap-3 text-lg font-semibold text-white md:text-2xl">
-              <p>We build deliberately for longevity.</p>
-              <p className="text-gray-200">We respect culture as infrastructure.</p>
-              <p className="text-gray-300">
-                Africa does not need more noise. It needs better systems.
+          <Reveal>
+            <div className="rounded-3xl border border-border bg-muted/25 p-8 md:p-10">
+              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                Our stance
               </p>
+              <div className="mt-3 grid gap-3 text-lg font-semibold text-white md:text-2xl">
+                <p>We build deliberately for longevity.</p>
+                <p className="text-gray-200">We respect culture as infrastructure.</p>
+                <p className="text-gray-300">
+                  Africa does not need more noise. It needs better systems.
+                </p>
+              </div>
             </div>
-          </div>
+          </Reveal>
         </Container>
       </section>
 
@@ -116,18 +176,24 @@ export default function HomePage() {
       <section className="bg-black py-16">
         <Container>
           <div className="mb-8 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-            <div className="animate-fade-in">
-              <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-                Our Companies
+            <Reveal>
+              <div>
+                <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                  Our Companies
+                </p>
+                <h2 className="mt-2 text-xl font-semibold">
+                  An ecosystem of stories, products, and platforms.
+                </h2>
+              </div>
+            </Reveal>
+
+            <Reveal delayMs={120}>
+              <p className="max-w-md text-xs text-gray-400">
+                Each subsidiary operates with its own identity and focus, while
+                Savvy Gorilla provides the long-term strategy, technology
+                standards, and brand stewardship.
               </p>
-              <h2 className="mt-2 text-xl font-semibold">
-                An ecosystem of stories, products, and platforms.
-              </h2>
-            </div>
-            <p className="max-w-md text-xs text-gray-400 animate-fade-in">
-              Each subsidiary operates with its own identity and focus, while Savvy Gorilla provides the long-term
-              strategy, technology standards, and brand stewardship.
-            </p>
+            </Reveal>
           </div>
 
           <CompanyGrid />
