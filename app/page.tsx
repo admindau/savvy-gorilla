@@ -1,30 +1,34 @@
 import Container from "./components/container";
 import CompanyGrid from "./components/company-grid";
+import NowBuilding from "./components/now-building";
 
 export default function HomePage() {
   return (
     <>
       {/* HERO SECTION */}
       <section className="border-b border-border bg-black">
-        <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-center md:justify-between">
+        <Container className="flex flex-col gap-10 py-16 md:flex-row md:items-start md:justify-between">
           {/* LEFT SIDE – TEXT */}
           <div className="max-w-xl animate-fade-in">
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
               Savvy Gorilla Technologies™
             </p>
+
             <div className="mt-3 h-px w-16 bg-accent" />
+
             <h1 className="mt-4 text-4xl font-semibold md:text-5xl">
               Where African innovation begins.
             </h1>
+
             <p className="mt-4 text-sm text-gray-300 md:text-base">
-              Savvy Gorilla is a modern African holding company building and
-              backing products at the intersection of{" "}
-              <span className="font-medium text-white">
-                creativity, culture, and technology.
-              </span>{" "}
-              From fintech platforms to storytelling studios, we are designing
-              the next generation of African solutions.
+              Savvy Gorilla is a modern African holding company building and backing
+              products at the intersection of{" "}
+              <span className="font-medium text-white">creativity, culture, and technology.</span>{" "}
+              From fintech platforms to storytelling studios, we are designing the next generation of African solutions.
             </p>
+
+            <NowBuilding />
+
             <div className="mt-6 flex flex-wrap gap-3 text-xs">
               <a
                 href="/ecosystem"
@@ -50,8 +54,8 @@ export default function HomePage() {
           </div>
 
           {/* RIGHT SIDE – LOGO + SNAPSHOT CARD */}
-          <div className="flex flex-col items-center gap-6 md:items-end md:mt-4">
-            {/* LOGO IN GOLD RING */}
+          <div className="flex flex-col items-center gap-6 md:items-end md:mt-1">
+            {/* LOGO IN ACCENT RING */}
             <div className="flex w-full justify-center md:justify-end">
               <div className="flex h-20 w-20 items-center justify-center rounded-full border border-accent/70 bg-black/80">
                 <img
@@ -90,6 +94,24 @@ export default function HomePage() {
         </Container>
       </section>
 
+      {/* MANIFESTO */}
+      <section className="bg-black py-14">
+        <Container>
+          <div className="rounded-3xl border border-border bg-muted/25 p-8 md:p-10 animate-fade-in">
+            <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+              Our stance
+            </p>
+            <div className="mt-3 grid gap-3 text-lg font-semibold text-white md:text-2xl">
+              <p>We build deliberately for longevity.</p>
+              <p className="text-gray-200">We respect culture as infrastructure.</p>
+              <p className="text-gray-300">
+                Africa does not need more noise. It needs better systems.
+              </p>
+            </div>
+          </div>
+        </Container>
+      </section>
+
       {/* ECOSYSTEM SECTION */}
       <section className="bg-black py-16">
         <Container>
@@ -103,9 +125,8 @@ export default function HomePage() {
               </h2>
             </div>
             <p className="max-w-md text-xs text-gray-400 animate-fade-in">
-              Each subsidiary operates with its own identity and focus, while
-              Savvy Gorilla provides the long-term strategy, technology
-              standards, and brand stewardship.
+              Each subsidiary operates with its own identity and focus, while Savvy Gorilla provides the long-term
+              strategy, technology standards, and brand stewardship.
             </p>
           </div>
 
