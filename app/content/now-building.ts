@@ -15,7 +15,7 @@ export const NOW_BUILDING: NowBuildingItem[] = [
     title: "Gorilla Ledger™",
     status: "In Progress",
     note: "Fintech tracking app shipping iteratively.",
-    href: "https://gorillaledger.savvyrilla.tech",
+    href: "https://gl.savvyrilla.tech",
     updated: "Jan 2026"
   },
   {

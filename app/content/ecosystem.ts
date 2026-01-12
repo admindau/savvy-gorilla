@@ -59,7 +59,7 @@ export const ECOSYSTEM: Company[] = [
     description: "Modern financial tracking for individuals and small teams across Africa.",
     missionLine: "A financial system you can actually live with.",
     status: "In Progress",
-    href: "https://gorillaledger.savvyrilla.tech",
+    href: "https://gl.savvyrilla.tech",
     lastUpdated: "Jan 2026",
     stageNote: "Core wallets + transactions stable; budgets + recurring next."
   },
