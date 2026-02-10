@@ -2,13 +2,7 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
-export default function Reveal({
-  children,
-  delayMs = 0
-}: {
-  children: ReactNode;
-  delayMs?: number;
-}) {
+export default function Reveal({ children, delayMs = 0 }: { children: ReactNode; delayMs?: number }) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [inView, setInView] = useState(false);
 
