@@ -4,8 +4,8 @@
   --background: #ffffff;
   --foreground: #171717;
 
-  /* 2026 Accent (controlled gold) */
-  --accent: #d6b25e;
+  /* Accent: Neon Green (interaction-first) */
+  --accent: #6AFF00;
 
   /* UI neutrals */
   --border: rgba(255, 255, 255, 0.10);
@@ -27,8 +27,8 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #0B0B0B;
+    --foreground: #F5F5F5;
 
     --border: rgba(255, 255, 255, 0.10);
     --muted: rgba(255, 255, 255, 0.06);
@@ -58,10 +58,3 @@ body {
 /* Reveal helper (used by Reveal component) */
 .reveal-init { opacity: 0; transform: translateY(14px); }
 .reveal-in { opacity: 1; transform: translateY(0); transition: opacity 700ms ease-out, transform 700ms ease-out; }
-
-/* Subtle background grain substitute (cheap, no images) */
-.bg-radial {
-  background:
-    radial-gradient(900px 500px at 15% 15%, rgba(214, 178, 94, 0.14), transparent 55%),
-    radial-gradient(900px 500px at 85% 20%, rgba(255, 255, 255, 0.06), transparent 60%);
-}
