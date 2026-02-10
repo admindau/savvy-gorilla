@@ -8,13 +8,13 @@ import { Inter, Space_Grotesk } from "next/font/google";
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
-  display: "swap"
+  display: "swap",
 });
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-space",
-  display: "swap"
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -34,20 +34,20 @@ export const metadata: Metadata = {
         url: "/logos/savvy-gorilla-og.png",
         width: 1200,
         height: 630,
-        alt: "Savvy Gorilla Technologies™"
-      }
-    ]
+        alt: "Savvy Gorilla Technologies™",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Savvy Gorilla Technologies™",
     description:
       "Where African innovation begins — a holding company for software, studios, and stories.",
-    images: ["/logos/savvy-gorilla-og.png"]
+    images: ["/logos/savvy-gorilla-og.png"],
   },
   icons: {
-    icon: "/favicon.ico"
-  }
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
