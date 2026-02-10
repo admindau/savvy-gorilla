@@ -3,6 +3,19 @@ import type { Metadata } from "next";
 import "./../styles/globals.css";
 import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
+import { Inter, Space_Grotesk } from "next/font/google";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap"
+});
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space",
+  display: "swap"
+});
 
 export const metadata: Metadata = {
   title: "Savvy Gorilla Technologies™ | Where African Innovation Begins",
@@ -39,7 +52,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="flex min-h-screen flex-col bg-black text-white">
         <SiteHeader />
         <main className="flex-1">{children}</main>

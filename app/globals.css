@@ -1,60 +1,162 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0B0B0B;
+  --foreground: #F5F5F5;
 
-  /* Accent: Neon Green (interaction-first) */
+  /* Neon Green (state + interaction only) */
   --accent: #6AFF00;
 
   /* UI neutrals */
   --border: rgba(255, 255, 255, 0.10);
   --muted: rgba(255, 255, 255, 0.06);
+
+  /* Typography */
+  --font-body: var(--font-inter), system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --font-display: var(--font-space), var(--font-body);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Tailwind v4 tokens used throughout your UI */
   --color-accent: var(--accent);
   --color-border: var(--border);
   --color-muted: var(--muted);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0B0B0B;
-    --foreground: #F5F5F5;
-
-    --border: rgba(255, 255, 255, 0.10);
-    --muted: rgba(255, 255, 255, 0.06);
-  }
+  --font-sans: var(--font-body);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
 
-/* ---- Motion primitives (lightweight, premium) ---- */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
+/* -------------------------------------------------------
+   CINEMATIC PRIMITIVES (SpaceX/Starlink-style discipline)
+-------------------------------------------------------- */
+
+/* Scene snapping (optional — works great on desktop) */
+.snap-y-mandatory {
+  scroll-snap-type: y mandatory;
+}
+.snap-start {
+  scroll-snap-align: start;
 }
 
+/* Film grain overlay (subtle, premium) */
+.film-grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  opacity: 0.10;
+  mix-blend-mode: overlay;
+  background-image:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.06), transparent 35%),
+    radial-gradient(circle at 70% 30%, rgba(255,255,255,0.05), transparent 40%),
+    radial-gradient(circle at 40% 80%, rgba(255,255,255,0.04), transparent 45%);
+}
+
+/* Hero image treatment */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: translateZ(0);
+}
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0.85) 65%, rgba(0,0,0,0.98)),
+    radial-gradient(1200px 700px at 50% 30%, rgba(255,255,255,0.08), transparent 55%);
+}
+
+/* Minimal, authoritative label */
+.kicker {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+}
+
+/* Display typography (SpaceX-like) */
+.display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* One-shot reveal animations */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-up { animation: fadeUp 750ms ease-out both; }
 
-.animate-fade-in { animation: fadeIn 650ms ease-out both; }
-.animate-fade-up { animation: fadeUp 700ms ease-out both; }
-
-/* Reveal helper (used by Reveal component) */
+/* Reveal helper (your Reveal component uses these) */
 .reveal-init { opacity: 0; transform: translateY(14px); }
 .reveal-in { opacity: 1; transform: translateY(0); transition: opacity 700ms ease-out, transform 700ms ease-out; }
+
+/* Interaction energy: subtle, single intent */
+@keyframes borderScan {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+.scan-border {
+  position: relative;
+  overflow: hidden;
+}
+.scan-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(90deg,
+    rgba(106,255,0,0.00),
+    rgba(106,255,0,0.28),
+    rgba(106,255,0,0.00)
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 220ms ease;
+  pointer-events: none;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+.scan-border:hover::before {
+  opacity: 1;
+  animation: borderScan 1.2s linear infinite;
+}
+
+/* Mission tile image zoom on hover (cinematic) */
+.mission-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: saturate(0.95) contrast(1.05);
+  transform: scale(1.02);
+  transition: transform 500ms ease;
+}
+.mission-tile:hover .mission-bg {
+  transform: scale(1.06);
+}
+.mission-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.78), rgba(0,0,0,0.25), rgba(0,0,0,0.88));
+}
+
+/* Reduce motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up { animation: none; }
+  .reveal-in { transition: none; }
+  .mission-tile:hover .mission-bg { transform: scale(1.02); }
+  .scan-border:hover::before { animation: none; }
+}
