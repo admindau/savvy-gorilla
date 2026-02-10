@@ -3,21 +3,18 @@
 import { useMemo, useState } from "react";
 import { ECOSYSTEM, ECOSYSTEM_FILTERS, type Company, type EcosystemFilterKey } from "../content/ecosystem";
 
-function statusBadgeClass(status: Company["status"]) {
-  if (status === "Live") return "border border-border bg-muted/60 text-gray-100";
-  if (status === "In Progress") return "border border-accent/40 bg-muted/60 text-gray-100";
-  return "border border-border bg-black/20 text-gray-300";
+function statusTone(status: Company["status"]) {
+  if (status === "Live") return "text-white/80";
+  if (status === "In Progress") return "text-white/75";
+  return "text-white/60";
 }
 
-function priorityCardClass(priority: Company["priority"]) {
-  // Product-first emphasis: core products get a subtle “signature” lift.
-  if (priority === "core") {
-    return "border-accent/30 bg-muted/55 hover:border-accent/45";
-  }
-  if (priority === "studio") {
-    return "border-border bg-muted/40 hover:border-gray-300/50";
-  }
-  return "border-border bg-black/25 hover:border-gray-300/40";
+function statusPill(status: Company["status"]) {
+  // Keep pills neutral; energy appears only on interaction.
+  return [
+    "rounded-full border border-border bg-white/5 px-3 py-1 text-[0.7rem]",
+    statusTone(status),
+  ].join(" ");
 }
 
 function priorityLabel(priority: Company["priority"]) {
@@ -35,7 +32,6 @@ function filterCompanies(filter: EcosystemFilterKey, items: Company[]) {
 
 function sortProductFirst(items: Company[]) {
   const rank = (c: Company) => {
-    // core products on top; then studios; then pillars
     if (c.priority === "core") return 0;
     if (c.priority === "studio") return 1;
     return 2;
@@ -46,7 +42,6 @@ function sortProductFirst(items: Company[]) {
     const rb = rank(b);
     if (ra !== rb) return ra - rb;
 
-    // secondary sort: Live first, then In Progress, then Concept
     const statusRank = (s: Company["status"]) => (s === "Live" ? 0 : s === "In Progress" ? 1 : 2);
     const sa = statusRank(a.status);
     const sb = statusRank(b.status);
@@ -54,6 +49,11 @@ function sortProductFirst(items: Company[]) {
 
     return a.name.localeCompare(b.name);
   });
+}
+
+function moduleIdFrom(company: Company) {
+  const raw = company.id.toUpperCase().replace(/[^A-Z0-9]/g, "");
+  return `SGT-${raw.slice(0, 8) || "NODE"}`;
 }
 
 export default function CompanyGrid() {
@@ -77,11 +77,12 @@ export default function CompanyGrid() {
               setFilter(f.key);
               setOpen(null);
             }}
-            className={`rounded-full px-4 py-2 text-[0.7rem] font-medium tracking-wide transition ${
+            className={[
+              "rounded-full px-4 py-2 text-[0.7rem] font-medium tracking-wide transition",
               filter === f.key
-                ? "border border-accent/50 bg-muted/70 text-white"
-                : "border border-border bg-black/20 text-gray-300 hover:text-gray-100"
-            }`}
+                ? "wk-scan border border-border bg-white/6 text-white"
+                : "border border-border bg-black/20 text-white/65 hover:text-white/85",
+            ].join(" ")}
             aria-pressed={filter === f.key}
           >
             {f.label}
@@ -93,87 +94,115 @@ export default function CompanyGrid() {
       <div className="grid gap-6 md:grid-cols-2">
         {visible.map((company, index) => {
           const isOpen = open === company.id;
+          const moduleId = moduleIdFrom(company);
 
           return (
             <div
               key={company.id}
-              className={`group rounded-2xl border p-6 transition duration-200 hover:-translate-y-1 hover:bg-muted/70 animate-fade-up ${priorityCardClass(
-                company.priority
-              )}`}
-              style={{ animationDelay: `${index * 45}ms` }}
+              className={[
+                "wk-glass wk-scan group rounded-3xl p-6 transition",
+                "hover:shadow-[0_0_0_1px_rgba(106,255,0,0.08),0_22px_70px_rgba(0,0,0,0.65)]",
+              ].join(" ")}
+              style={{ animationDelay: `${index * 35}ms` }}
             >
-              <div className="flex items-start justify-between gap-4">
+              {/* Module header */}
+              <div className="flex items-start justify-between gap-5">
                 <div className="min-w-0">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="text-[0.6rem] font-semibold tracking-[0.25em] uppercase text-gray-500">
+                    <p className="text-[0.6rem] font-semibold tracking-[0.28em] uppercase text-white/45">
                       {company.tag}
                     </p>
-                    <span className="rounded-full border border-border bg-black/20 px-2 py-[2px] text-[0.65rem] text-gray-300">
+                    <span className="rounded-full border border-border bg-black/20 px-2 py-[2px] text-[0.65rem] text-white/55">
                       {priorityLabel(company.priority)}
                     </span>
+                    <span className="text-[0.65rem] text-white/35">•</span>
+                    <span className="text-[0.65rem] text-white/55">{moduleId}</span>
                   </div>
 
-                  <h3 className="mt-2 truncate text-lg font-semibold text-white">{company.name}</h3>
-                  <p className="mt-2 text-sm text-gray-300">{company.description}</p>
+                  <h3 className="mt-2 truncate text-lg font-semibold text-white">
+                    {company.name}
+                  </h3>
+
+                  <p className="mt-2 text-sm text-white/70">
+                    {company.description}
+                  </p>
+
+                  {/* African logic meta */}
+                  <div className="mt-4 flex flex-wrap gap-2 text-[0.72rem] text-white/55">
+                    <span className="rounded-full border border-border bg-black/15 px-3 py-1">
+                      REGION: AFRICA
+                    </span>
+                    <span className="rounded-full border border-border bg-black/15 px-3 py-1">
+                      NODE: {company.tag}
+                    </span>
+                    <span className="rounded-full border border-border bg-black/15 px-3 py-1">
+                      UPDATED: {company.lastUpdated ?? "—"}
+                    </span>
+                  </div>
                 </div>
 
-                <div className={`shrink-0 rounded-full px-3 py-1 text-[0.7rem] ${statusBadgeClass(company.status)}`}>
-                  {company.status}
-                </div>
+                <div className={statusPill(company.status)}>{company.status}</div>
               </div>
 
               {/* Actions */}
-              <div className="mt-4 flex flex-wrap items-center gap-3">
+              <div className="mt-6 flex flex-wrap items-center gap-3">
                 <button
                   type="button"
                   onClick={() => setOpen(isOpen ? null : company.id)}
-                  className="rounded-full border border-border px-4 py-2 text-[0.75rem] font-medium text-gray-200 transition hover:border-gray-300/60 hover:text-white"
+                  className="wk-scan rounded-full border border-border bg-black/10 px-4 py-2 text-[0.75rem] font-medium text-white/75 transition hover:text-white"
                   aria-expanded={isOpen}
                 >
-                  {isOpen ? "Collapse" : "Details"}
+                  {isOpen ? "Seal" : "Observe"}
                 </button>
 
-                {company.href && (
+                {company.href ? (
                   <a
                     href={company.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="rounded-full border border-border px-4 py-2 text-[0.75rem] font-medium text-gray-300 transition hover:border-gray-300/60 hover:text-white"
+                    className="rounded-full border border-border bg-black/0 px-4 py-2 text-[0.75rem] font-medium text-white/65 transition hover:border-white/20 hover:text-white"
                   >
-                    Visit ↗
+                    Engage ↗
+                  </a>
+                ) : (
+                  <a
+                    href="/ecosystem"
+                    className="rounded-full border border-border bg-black/0 px-4 py-2 text-[0.75rem] font-medium text-white/65 transition hover:border-white/20 hover:text-white"
+                  >
+                    Engage →
                   </a>
                 )}
               </div>
 
               {/* Details */}
               {isOpen && (
-                <div className="mt-4 rounded-2xl border border-border/80 bg-black/30 p-4">
-                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
-                    Why it exists
+                <div className="mt-5 rounded-3xl border border-border bg-black/25 p-5">
+                  <p className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-white/45">
+                    Intent
                   </p>
 
-                  <p className="mt-2 text-sm text-gray-200">
+                  <p className="mt-2 text-sm text-white/80">
                     {company.missionLine ?? "Built to strengthen the Savvy Gorilla ecosystem through focus and craft."}
                   </p>
 
-                  <div className="mt-4 grid gap-2 text-xs text-gray-400 sm:grid-cols-3">
+                  <div className="mt-4 grid gap-2 text-xs text-white/55 sm:grid-cols-3">
                     <div>
-                      <span className="text-gray-300">Status:</span> {company.status}
+                      <span className="text-white/70">Status:</span> {company.status}
                     </div>
                     <div>
-                      <span className="text-gray-300">Updated:</span> {company.lastUpdated ?? "—"}
+                      <span className="text-white/70">Module:</span> {moduleId}
                     </div>
                     <div>
-                      <span className="text-gray-300">Focus:</span> {company.tag}
+                      <span className="text-white/70">Class:</span> {priorityLabel(company.priority)}
                     </div>
                   </div>
 
                   {company.stageNote && (
-                    <div className="mt-3 rounded-2xl border border-border bg-black/25 p-3">
-                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.25em] text-gray-500">
+                    <div className="mt-4 rounded-3xl border border-border bg-black/18 p-4">
+                      <p className="text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-white/45">
                         Momentum
                       </p>
-                      <p className="mt-2 text-sm text-gray-200">{company.stageNote}</p>
+                      <p className="mt-2 text-sm text-white/75">{company.stageNote}</p>
                     </div>
                   )}
                 </div>

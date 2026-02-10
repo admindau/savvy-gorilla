@@ -2,9 +2,11 @@
 
 /* ===========================
    Savvy Gorilla — Wakanda Forge (Command Center)
+   Goal: implied structure, energy-on-acknowledgment
    Rules:
    - Dark is default
    - Neon green is interaction-only
+   - Borders are quiet; hover reveals structure
 =========================== */
 
 :root {
@@ -14,9 +16,10 @@
   /* Interaction energy ONLY */
   --accent: #6AFF00;
 
-  /* UI neutrals */
-  --border: rgba(255, 255, 255, 0.10);
-  --muted: rgba(255, 255, 255, 0.06);
+  /* UI neutrals (quiet by default) */
+  --border: rgba(255, 255, 255, 0.04);
+  --border-strong: rgba(255, 255, 255, 0.10);
+  --muted: rgba(255, 255, 255, 0.05);
 
   /* Premium system font stack */
   --font-body: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -54,6 +57,27 @@ html, body {
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* -------- Field transitions (replaces big divider lines) -------- */
+.wk-field {
+  position: relative;
+}
+
+.wk-field::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0.06),
+    rgba(255,255,255,0.00)
+  );
+  opacity: 0.22;
+}
+
 /* -------- Sealed chamber background -------- */
 .wk-chamber {
   position: relative;
@@ -66,9 +90,9 @@ html, body {
 
 /* The grid is “alive” but calm */
 @keyframes wkGridDrift {
-  0% { transform: translate3d(0, 0, 0); opacity: 0.10; }
-  50% { transform: translate3d(-28px, -28px, 0); opacity: 0.15; }
-  100% { transform: translate3d(-56px, -56px, 0); opacity: 0.10; }
+  0% { transform: translate3d(0, 0, 0); opacity: 0.08; }
+  50% { transform: translate3d(-28px, -28px, 0); opacity: 0.12; }
+  100% { transform: translate3d(-56px, -56px, 0); opacity: 0.08; }
 }
 
 .wk-grid {
@@ -79,7 +103,7 @@ html, body {
     linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
   background-size: 56px 56px;
-  animation: wkGridDrift 22s linear infinite;
+  animation: wkGridDrift 26s linear infinite;
   mask-image: radial-gradient(circle at 50% 26%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0) 82%);
   -webkit-mask-image: radial-gradient(circle at 50% 26%, rgba(0,0,0,1) 0%, rgba(0,0,0,0.65) 55%, rgba(0,0,0,0) 82%);
 }
@@ -96,11 +120,19 @@ html, body {
     radial-gradient(circle at 50% 82%, rgba(255,255,255,0.04), transparent 45%);
 }
 
-/* -------- Vibranium glass panels -------- */
+/* -------- Vibranium glass panels (quiet border + inner glow) -------- */
 .wk-glass {
-  background: rgba(255,255,255,0.035);
+  background: rgba(255,255,255,0.03);
   border: 1px solid var(--border);
   backdrop-filter: blur(10px);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.06),
+    0 10px 40px rgba(0,0,0,0.55);
+}
+
+/* Use when you really need a stronger line (rare) */
+.wk-border-strong {
+  border-color: var(--border-strong);
 }
 
 /* -------- Observer pill -------- */
@@ -111,7 +143,7 @@ html, body {
   padding: 6px 12px;
   border-radius: 9999px;
   border: 1px solid var(--border);
-  background: rgba(255,255,255,0.035);
+  background: rgba(255,255,255,0.03);
   color: rgba(255,255,255,0.86);
   font-size: 0.70rem;
   letter-spacing: 0.20em;
@@ -123,7 +155,7 @@ html, body {
   width: 6px;
   height: 6px;
   border-radius: 9999px;
-  background: rgba(255,255,255,0.65);
+  background: rgba(255,255,255,0.60);
   box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
@@ -147,7 +179,7 @@ html, body {
   background: linear-gradient(
     90deg,
     rgba(106,255,0,0.00),
-    rgba(106,255,0,0.28),
+    rgba(106,255,0,0.26),
     rgba(106,255,0,0.00)
   );
   background-size: 200% 100%;
@@ -166,8 +198,8 @@ html, body {
   animation: wkScan 1.15s linear infinite;
 }
 
-/* When the parent is hovered, energize the dot */
-.wk-scan:hover .wk-dot {
+.wk-scan:hover .wk-dot,
+.wk-scan:focus-within .wk-dot {
   background: rgba(106,255,0,0.85);
   box-shadow: 0 0 18px rgba(106,255,0,0.18);
 }
@@ -176,19 +208,11 @@ html, body {
 .reveal-init { opacity: 0; transform: translateY(14px); }
 .reveal-in { opacity: 1; transform: translateY(0); transition: opacity 700ms ease-out, transform 700ms ease-out; }
 
-/* -------- The “Hall moment” (silence) -------- */
+/* -------- Hall background (deeper silence) -------- */
 .wk-hall {
   background:
-    radial-gradient(1100px 640px at 50% 30%, rgba(255,255,255,0.06), transparent 62%),
-    linear-gradient(to bottom, rgba(0,0,0,0.70), rgba(0,0,0,0.94));
-}
-
-/* -------- Unlock overlay -------- */
-.wk-unlock {
-  border: 1px solid rgba(106,255,0,0.20);
-  box-shadow:
-    0 0 0 1px rgba(106,255,0,0.14),
-    0 0 34px rgba(106,255,0,0.16);
+    radial-gradient(1100px 640px at 50% 30%, rgba(255,255,255,0.05), transparent 62%),
+    linear-gradient(to bottom, rgba(0,0,0,0.76), rgba(0,0,0,0.95));
 }
 
 /* -------- Motion discipline -------- */
