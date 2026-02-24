@@ -45,9 +45,6 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
-
-        {/* Decorative seal (purely visual). Put /sgt.svg in /public. */}
-        <RotatingSeal src="/sgt.svg" position="br" />
       </body>
     </html>
   );
