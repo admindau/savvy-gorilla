@@ -100,7 +100,7 @@ export default function CompanyGrid() {
             <div
               key={company.id}
               className={[
-                "wk-glass wk-scan group rounded-3xl p-6 transition",
+                "wk-glass wk-scan wk-lift wk-tilt group rounded-3xl p-6 transition",
                 "hover:shadow-[0_0_0_1px_rgba(106,255,0,0.08),0_22px_70px_rgba(0,0,0,0.65)]",
               ].join(" ")}
               style={{ animationDelay: `${index * 35}ms` }}

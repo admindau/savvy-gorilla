@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import "./../styles/globals.css";
 import SiteHeader from "./components/site-header";
 import SiteFooter from "./components/site-footer";
+import RotatingSeal from "./components/rotating-seal";
+import ScrollProgress from "./components/scroll-progress";
 
 export const metadata: Metadata = {
   title: "Savvy Gorilla Technologies™ | The Forge for African Systems",
@@ -39,9 +41,13 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col bg-black text-white">
+        <ScrollProgress placement="top" />
         <SiteHeader />
         <main className="flex-1">{children}</main>
         <SiteFooter />
+
+        {/* Decorative seal (purely visual). Put /sgt.svg in /public. */}
+        <RotatingSeal src="/sgt.svg" position="br" />
       </body>
     </html>
   );

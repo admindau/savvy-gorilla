@@ -95,7 +95,7 @@ export default function HomePage() {
             {/* Right: Control Panel */}
             <div className="space-y-4">
               <Reveal>
-                <div className="wk-glass wk-scan rounded-3xl p-6 md:p-7">
+                <div className="wk-glass wk-scan wk-lift wk-tilt rounded-3xl p-6 md:p-7">
                   <p className="kicker">Telemetry</p>
 
                   <div className="mt-4 space-y-3 text-sm text-white/80">
@@ -122,7 +122,7 @@ export default function HomePage() {
               </Reveal>
 
               <Reveal delayMs={120}>
-                <div className="wk-glass wk-scan rounded-3xl p-6 md:p-7">
+                <div className="wk-glass wk-scan wk-lift wk-tilt rounded-3xl p-6 md:p-7">
                   <p className="kicker">At a glance</p>
                   <div className="mt-4">
                     <AtAGlance />
@@ -132,7 +132,7 @@ export default function HomePage() {
 
               {/* Keys */}
               <Reveal delayMs={220}>
-                <div className="wk-glass rounded-3xl p-6 md:p-7">
+                <div className="wk-glass wk-lift wk-tilt rounded-3xl p-6 md:p-7">
                   <p className="kicker">Keys</p>
 
                   <div className="mt-4 grid grid-cols-2 gap-3 text-xs text-white/75">
@@ -181,7 +181,7 @@ export default function HomePage() {
 
           <div className="mt-10 grid gap-4 md:grid-cols-2">
             {coreProducts.slice(0, 4).map((p) => (
-              <div key={p.id} className="wk-glass wk-scan rounded-3xl p-7">
+              <div key={p.id} className="wk-glass wk-scan wk-lift wk-tilt rounded-3xl p-7">
                 <div className="flex items-start justify-between gap-6">
                   <div>
                     <p className="display text-lg font-semibold">{p.name}</p>
