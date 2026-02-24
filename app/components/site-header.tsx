@@ -136,6 +136,15 @@ export default function SiteHeader() {
             ))}
           </div>
         </nav>
+        {/* Decorative revolving seal (top-of-page) */}
+        <div className="hidden md:block" aria-hidden="true">
+          <div className="wk-orbit">
+            <div className="wk-orbit__ring" />
+            <Image src="/sgt.svg" alt="" width={28} height={28} className="wk-orbit__mark" priority />
+          </div>
+        </div>
+
+
 
         {/* Mobile menu button */}
         <button
