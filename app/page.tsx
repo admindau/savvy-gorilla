@@ -37,7 +37,9 @@ export default function HomePage() {
                 <h1 className="display mt-4 text-4xl font-semibold leading-[1.06] md:text-6xl">
                   THE FORGE FOR
                   <br />
-                  AFRICAN SYSTEMS.
+                  SOUTH SUDAN 
+                  <br />
+                  SYSTEMS.
                 </h1>
               </Reveal>
 
