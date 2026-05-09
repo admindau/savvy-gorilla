@@ -10,7 +10,11 @@ const features = [
     title: "AI Systems",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-        <path d="M9 3v18M15 3v18M5 8h14M5 16h14" stroke="currentColor" strokeWidth="1.6" />
+        <path
+          d="M9 3v18M15 3v18M5 8h14M5 16h14"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        />
         <path d="M7 5h10v14H7z" stroke="currentColor" strokeWidth="1.6" />
       </svg>
     ),
@@ -19,7 +23,11 @@ const features = [
     title: "Digital Platforms",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-        <path d="M12 4 3 9l9 5 9-5-9-5Z" stroke="currentColor" strokeWidth="1.6" />
+        <path
+          d="M12 4 3 9l9 5 9-5-9-5Z"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        />
         <path d="m3 14 9 5 9-5" stroke="currentColor" strokeWidth="1.6" />
       </svg>
     ),
@@ -28,7 +36,11 @@ const features = [
     title: "Secure Infrastructure",
     icon: (
       <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none">
-        <path d="M12 3 5 6v5c0 4.5 2.9 8.4 7 10 4.1-1.6 7-5.5 7-10V6l-7-3Z" stroke="currentColor" strokeWidth="1.6" />
+        <path
+          d="M12 3 5 6v5c0 4.5 2.9 8.4 7 10 4.1-1.6 7-5.5 7-10V6l-7-3Z"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        />
         <path d="M9.5 12.5h5M12 10v5" stroke="currentColor" strokeWidth="1.6" />
       </svg>
     ),
@@ -49,9 +61,16 @@ export default function Home() {
       className="relative flex min-h-screen items-center justify-center overflow-hidden bg-black px-6 py-12 text-white"
     >
       <div
-        className="pointer-events-none absolute inset-0 opacity-60"
+        className="pointer-events-none absolute inset-0 opacity-70"
         style={{
-          background: `radial-gradient(420px circle at ${cursor.x}% ${cursor.y}%, rgba(16,185,129,0.16), transparent 45%)`,
+          background: `radial-gradient(520px circle at ${cursor.x}% ${cursor.y}%, rgba(16,185,129,0.16), transparent 48%)`,
+        }}
+      />
+
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: `radial-gradient(circle at ${cursor.x}% ${cursor.y}%, transparent 0%, rgba(0,0,0,0.10) 38%, rgba(0,0,0,0.68) 100%)`,
         }}
       />
 
@@ -80,10 +99,10 @@ export default function Home() {
         />
       ))}
 
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.35)_54%,rgba(0,0,0,0.96)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,rgba(0,0,0,0.32)_54%,rgba(0,0,0,0.94)_100%)]" />
 
       <section className="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
-        <div className="mb-6 flex flex-col items-center">
+        <div className="mb-6 flex flex-col items-center animate-logo-float">
           <div className="relative h-16 w-16 opacity-90 drop-shadow-[0_0_24px_rgba(255,255,255,0.16)]">
             <Image
               src="/logos/savvy-gorilla-white.png"
@@ -105,10 +124,11 @@ export default function Home() {
           System Upgrade in Progress
         </div>
 
-        <div className="relative">
-          <h1 className="max-w-5xl text-6xl font-black uppercase tracking-[0.16em] text-white drop-shadow-[0_0_28px_rgba(16,185,129,0.28)] sm:text-7xl md:text-8xl">
+        <div className="relative overflow-hidden">
+          <h1 className="relative max-w-5xl text-6xl font-black uppercase tracking-[0.16em] text-white drop-shadow-[0_0_28px_rgba(16,185,129,0.28)] sm:text-7xl md:text-8xl">
             Coming Soon
           </h1>
+          <div className="pointer-events-none absolute inset-0 -translate-x-full bg-[linear-gradient(110deg,transparent_0%,transparent_42%,rgba(255,255,255,0.75)_50%,transparent_58%,transparent_100%)] opacity-30 mix-blend-overlay animate-title-shimmer" />
         </div>
 
         <p className="mt-6 max-w-2xl text-base leading-8 text-white/65 sm:text-lg">
@@ -160,9 +180,14 @@ export default function Home() {
           ))}
         </div>
 
-        <p className="mt-14 text-xs uppercase tracking-[0.35em] text-white/35">
-          Savvy Gorilla Technologies · Juba · Africa
-        </p>
+        <div className="mt-14 space-y-3 text-center">
+          <p className="text-xs uppercase tracking-[0.35em] text-white/35">
+            Savvy Gorilla Technologies · Juba · Africa
+          </p>
+          <p className="font-mono text-[0.6rem] uppercase tracking-[0.28em] text-white/25">
+            Powered by Savvy Gorilla Intelligence Systems
+          </p>
+        </div>
       </section>
 
       <style jsx global>{`
@@ -261,6 +286,35 @@ export default function Home() {
           }
         }
 
+        @keyframes logo-float {
+          0%,
+          100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-6px);
+          }
+        }
+
+        @keyframes title-shimmer {
+          0%,
+          82% {
+            transform: translateX(-120%);
+            opacity: 0;
+          }
+          86% {
+            opacity: 0.35;
+          }
+          94% {
+            transform: translateX(120%);
+            opacity: 0.35;
+          }
+          100% {
+            transform: translateX(120%);
+            opacity: 0;
+          }
+        }
+
         .animate-grid-drift {
           animation: grid-drift 28s linear infinite;
         }
@@ -297,6 +351,14 @@ export default function Home() {
 
         .animate-card-scan {
           animation: card-scan 1.4s ease-in-out infinite;
+        }
+
+        .animate-logo-float {
+          animation: logo-float 9s ease-in-out infinite;
+        }
+
+        .animate-title-shimmer {
+          animation: title-shimmer 14s ease-in-out infinite;
         }
       `}</style>
     </main>
