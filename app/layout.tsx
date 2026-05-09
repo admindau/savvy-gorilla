@@ -42,8 +42,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     <html lang="en">
       <body className="flex min-h-screen flex-col bg-black text-white">
         <ScrollProgress placement="top" />
-        <SiteHeader />
-        <main className="flex-1">{children}</main>
+                <main className="flex-1">{children}</main>
         <SiteFooter />
       </body>
     </html>
